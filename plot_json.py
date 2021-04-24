@@ -67,7 +67,7 @@ def get_json(json_file=None, **kwargs):
     # Load JSON lines into a dict allowing duplicate datetimes
     for line in json_lines:
         temp = json.loads(line)
-        json_dict.setdefault(temp.keys()[0], {}).update(temp.values()[0])
+        json_dict.setdefault(list(temp.keys())[0], {}).update(list(temp.values())[0])
 
     logging.debug("JSON dict loaded:\n%s", json_dict)
 
