@@ -38,7 +38,7 @@ def get_args():
         "-i", "--input", dest='json_file', help="JSON input file")
     parser.add_argument(
         "-d", "--datefmt", default=DATE_FORMAT, dest='date_format',
-        help="JSON date format (default: %s)" %(DATE_FORMAT.replace('%', '%%')))
+        help="JSON date format (default: %s)" % (DATE_FORMAT.replace('%', '%%')))
     parser.add_argument(
         "-v", "--verbose", default=logging.INFO, action="store_const",
         dest="loglevel", const=logging.DEBUG, help="show verbose debug output")
@@ -48,6 +48,7 @@ def get_args():
                         format=LOG_FORMAT, level=args.loglevel)
 
     return args
+
 
 def get_json(json_file=None, **kwargs):
     """Returns a merged dict from provided JSON lines"""
@@ -71,6 +72,7 @@ def get_json(json_file=None, **kwargs):
     logging.debug("JSON dict loaded:\n%s", json_dict)
 
     return json_dict
+
 
 def plot_json(json_dict, parents, children, date_format=DATE_FORMAT, **kwargs):
     """Displays the requested plot(s) filtered by parents and children"""
@@ -98,11 +100,13 @@ def plot_json(json_dict, parents, children, date_format=DATE_FORMAT, **kwargs):
         plt.legend()
         plt.show()
 
+
 def main():
     """Parse arguments and plot JSON"""
     args = get_args()
     json_dict = get_json(**vars(args))
     plot_json(json_dict, **vars(args))
+
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,24 @@
+image: bash:latest
+
+stages:
+  - lint
+
+before_script:
+  - apk --update add coreutils git py3-pip python3
+
+flake8:
+  stage: lint
+  script:
+    - pip3 install flake8 --quiet
+    - flake8 --ignore=E501 *.py  # E501 line too long
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+pylint:
+  stage: lint
+  script:
+    - pip3 install pylint --quiet
+    - pylint --disable=import-error *.py
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
